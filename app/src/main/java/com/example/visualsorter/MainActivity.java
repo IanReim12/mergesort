@@ -58,7 +58,67 @@ public class MainActivity extends AppCompatActivity
 
     private void mergeSort(int[] ar)
     {
+        this.mergeSortHelper(ar, 0, ar.length-1);
+    }
 
+    private void merge(int[] ar, int begin1, int end1, int begin2, int end2)
+    {
+        int[] temp = new int[end2 - begin1 + 1];
+        int pos1 = begin1;
+        int pos2 = begin2;
+        for(int i = 0; i < temp.length; i++)
+        {
+            if(pos1 <= end1 && pos2 <= end2)
+            {
+                if(ar[pos1] < ar[pos2])
+                {
+                    temp[i] = ar[pos1];
+                    pos1++;
+                }
+                else
+                {
+                    temp[i] = ar[pos2];
+                    pos2++;
+                }
+            }
+            else if(pos1 <= end1)
+            {
+                temp[i] = ar[pos1];
+                pos1++;
+            }
+            else
+            {
+                temp[i] = ar[pos2];
+                pos2++;
+            }
+        }
+
+        //copies the values from temp back into the correct portion of ar
+        int pos = begin1;
+        for(int i = 0; i < temp.length; i++)
+        {
+            ar[pos] = temp[i];
+            pos++;
+        }
+    }
+
+    private void mergeSortHelper(int[] ar, int begin, int end)
+    {
+        //If i am NOT dealing with a one-list
+        if(begin != end)
+        {
+            int begin1 = begin;
+            int end1 = (end + begin)/2;
+            int begin2 = end1 + 1;
+            int end2 = end;
+
+            this.mergeSortHelper(ar, begin1, end1);
+            this.mergeSortHelper(ar, begin2, end2);
+
+            //when i finally get here, that means both of my mergeSort calls have finished
+            //the first half is sorted, the second half is sorted, i need to merge them together
+            this.merge(ar, begin1, end1, begin2, end2);
+        }
     }
 
     //recursion refresher example
