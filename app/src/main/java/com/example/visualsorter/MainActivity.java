@@ -43,11 +43,9 @@ public class MainActivity extends AppCompatActivity
     {
         int theFollower, swap;
 
-        for(int currStart = 1; currStart < ar.length; currStart++)
-        {
+        for(int currStart = 1; currStart < ar.length; currStart++) {
             theFollower = currStart;
-            while(theFollower > 0 && ar[theFollower] < ar[theFollower-1])
-            {
+            while(theFollower > 0 && ar[theFollower] < ar[theFollower-1]) {
                 swap = ar[theFollower];
                 ar[theFollower] = ar[theFollower-1];
                 ar[theFollower-1] = swap;
@@ -70,30 +68,25 @@ public class MainActivity extends AppCompatActivity
         {
             if(pos1 <= end1 && pos2 <= end2)
             {
-                if(ar[pos1] < ar[pos2])
-                {
+                if(ar[pos1] < ar[pos2]) {
                     temp[i] = ar[pos1];
                     pos1++;
                 }
-                else
-                {
+                else {
                     temp[i] = ar[pos2];
                     pos2++;
                 }
             }
-            else if(pos1 <= end1)
-            {
+            else if(pos1 <= end1) {
                 temp[i] = ar[pos1];
                 pos1++;
             }
-            else
-            {
+            else {
                 temp[i] = ar[pos2];
                 pos2++;
             }
         }
 
-        //copies the values from temp back into the correct portion of ar
         int pos = begin1;
         for(int i = 0; i < temp.length; i++)
         {
@@ -104,29 +97,21 @@ public class MainActivity extends AppCompatActivity
 
     private void mergeSortHelper(int[] ar, int begin, int end)
     {
-        //If i am NOT dealing with a one-list
-        if(begin != end)
-        {
+        if(begin != end) {
             int begin1 = begin;
             int end1 = (end + begin)/2;
             int begin2 = end1 + 1;
             int end2 = end;
-
             this.mergeSortHelper(ar, begin1, end1);
             this.mergeSortHelper(ar, begin2, end2);
-
-            //when i finally get here, that means both of my mergeSort calls have finished
-            //the first half is sorted, the second half is sorted, i need to merge them together
             this.merge(ar, begin1, end1, begin2, end2);
-        }
-    }
+        } }
 
-    //recursion refresher example
-    //5! = 5 * 4 * 3 * 2 * 1 -> 5 * 4!
+
+
     private int factorial(int n)
     {
-        if(n == 1)
-        {
+        if(n == 1) {
             return 1;
         }
         return n * this.factorial(n-1);
@@ -134,14 +119,14 @@ public class MainActivity extends AppCompatActivity
 
     public void insertionSortButtonPressed(View vy)
     {
-        //perform an insertion sort on the unsortedArray
+
         this.insertionSort(this.unsortedNumbers);
         this.updateStringArrays();
     }
 
     public void mergeSortButtonPressed(View vy)
     {
-        //perform a merge sort on the unsortedArray
+
         this.mergeSort(this.unsortedNumbers);
         this.updateStringArrays();
     }
@@ -153,7 +138,7 @@ public class MainActivity extends AppCompatActivity
 
     private void initializeArrays()
     {
-        //fill my unsorted int array
+
         this.fillRandomIntArray(this.unsortedNumbers);
         this.copyContentsOfIntArrays(this.unsortedNumbers, this.sortedNumbers);
         this.updateStringArrays();
@@ -161,7 +146,6 @@ public class MainActivity extends AppCompatActivity
 
     private void updateStringArrays()
     {
-        //fill my string arrays to mimic the int arrays
         this.copyIntArrayToStringArray(this.unsortedNumbers, this.unsortedStrings);
         this.copyIntArrayToStringArray(this.sortedNumbers, this.sortedStrings);
         this.sortedAA.notifyDataSetChanged();
@@ -192,6 +176,5 @@ public class MainActivity extends AppCompatActivity
         for(int i = 0; i < ar.length; i++)
         {
             ar[i] = r.nextInt(500);
-        }
-    }
+        } }
 }
